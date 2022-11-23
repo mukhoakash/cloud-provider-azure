@@ -267,7 +267,7 @@ func (c *controllerCommon) AttachDisk(ctx context.Context, async bool, diskName,
 			klog.Warningf("azureDisk - switch to batch operation due to rate limited, QPS: %f", c.diskOpRateLimiter.QPS())
 		}
 	}
-	resourceGroup, _, err := getInfoFromDiskURI(diskURI)
+	resourceGroup, err := c.cloud.GetNodeResourceGroup(string(nodeName))
 	if err != nil {
 		return -1, err
 	}
